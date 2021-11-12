@@ -1,1 +1,1 @@
-### FSM Unit Testing of Java implementations
+# FSM Unit Testing of Java implementations
