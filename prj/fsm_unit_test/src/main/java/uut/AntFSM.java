@@ -1,19 +1,20 @@
+package uut;
 public class AntFSM {
     private static final String[] states = {"Staying_at_home", "Searching_for_a_leaf", "Carrying_the_leaf", "Escaping_from_a_predator"};
     private int state = 0;
 
     public String getState() {
-        if(state >= 0 && state <= 3)
+        if (state >= 0 && state <= 3)
             return states[state];
         else
             throw new RuntimeException("Invalid state value!");
     }
 
     int returnSpeed(boolean atHome, boolean foundLeaf, boolean seePredator) {
-        switch(state) {
-            case(0):    // Staying_at_home
-                if(!seePredator) {
-                    if(foundLeaf) {
+        switch (state) {
+            case (0):    // Staying_at_home
+                if (!seePredator) {
+                    if (foundLeaf) {
                         state = 2;
                         return 1;
                     } else {
@@ -23,9 +24,9 @@ public class AntFSM {
                 } else {
                     return 0;
                 }
-            case(1):    // Searching_for_a_leaf
-                if(seePredator) {
-                    if(atHome) {
+            case (1):    // Searching_for_a_leaf
+                if (seePredator) {
+                    if (atHome) {
                         state = 0;
                         return 0;
                     } else {
@@ -33,26 +34,26 @@ public class AntFSM {
                         return 10;
                     }
                 } else {
-                    if(foundLeaf) {
+                    if (foundLeaf) {
                         state = 2;
                         return 1;
                     } else {
                         return 5;
                     }
                 }
-            case(2):    // Carrying_the_leaf
-                if(atHome) {
+            case (2):    // Carrying_the_leaf
+                if (atHome) {
                     state = 0;
                     return 0;
-                } else if(seePredator) {
+                } else if (seePredator) {
                     state = 3;
                     return 10;
                 } else {
                     return 1;
                 }
-            case(3):    // Escaping_from_predator
-                if(!seePredator) {
-                    if(!foundLeaf) {
+            case (3):    // Escaping_from_predator
+                if (!seePredator) {
+                    if (!foundLeaf) {
                         state = 1;
                         return 5;
                     } else {
@@ -60,7 +61,7 @@ public class AntFSM {
                         return 1;
                     }
                 } else {
-                    if(atHome) {
+                    if (atHome) {
                         state = 0;
                         return 0;
                     } else {
